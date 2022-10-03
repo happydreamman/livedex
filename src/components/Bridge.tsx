@@ -166,7 +166,7 @@ function Bridge(props: any) {
   }, [network2]);
 
   // *** Switch Chain
-  const switchChain = async (chain_id:any) => {
+  const switchChain = async (chain_id: number) => {
     const win:any = window;
 
     if (win.ethereum && chainId !== chain_id) {
@@ -177,16 +177,16 @@ function Bridge(props: any) {
         })
 
         return true; 
-      } catch (switchError) {
-        if (switchError.code === 4902) {
+      } catch (error) {
+        let chainId_s = chain_id.toString(16)
           try {
             await win.ethereum.request({
               method: 'wallet_addEthereumChain',
               params: [
                 {
                   chainId: '0x' + chain_id.toString(16),
-                  chainName: chainlist[chain_id].chainName,
-                  rpcUrls: [...chainlist[chain_id].rpcUrls] /* ... */,
+                  chainName: chainlist[chainId_s].chainName,
+                  rpcUrls: [...chainlist[chainId_s].rpcUrls] /* ... */,
                   blockExplorerUrls: [...chainlist[chain_id].blockExplorerUrls] /* ... */,
                   nativeCurrency: {
                     name: chainlist[chain_id].nativeCurrency.name,
@@ -200,7 +200,7 @@ function Bridge(props: any) {
           } catch (addError) {
             return false;
           }
-        }
+        
         return false;
       }
     }

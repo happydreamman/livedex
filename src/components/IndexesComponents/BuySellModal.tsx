@@ -6,7 +6,7 @@ import _ from "lodash";
 import { loadContract } from '../../utils';
 import { BigNumber } from "@0x/utils";
 import Web3 from "web3";
-import { walletTokens as toks } from "../../constants/spot-config/mainnet/config.json";
+import { config } from "../../constants/spot-config/mainnet/config";
 import {
   CHANGE_NOW_FLOW, SIDE_SHIFT_TYPE, supportedDEXes, SIMPLE_SWAP_FIXED, DEXesImages,
   ZERO, PARASWAP_REFERRER_ACCOUNT, networks_dict
@@ -38,7 +38,7 @@ function BuySellModal({ show1, setShow1, token }: any) {
   const [side, setSide] = useState("");
   const [from, setFrom]: any = useState(token);
   const [buySell, setBuySell] = useState('Buy');
-  const [to, setTo]: any = useState({ ...toks[2], value: 0, max: 0 });
+  const [to, setTo]: any = useState({ ...config.walletTokens[2], value: 0, max: 0 });
   const [com_addresses, setComAddressses] = useState<Array<string>>();
   const [com_quantities, setComQuantities] = useState<Array<BigNumber>>();
   const [need_quantities, setNeedQuantities] = useState<Array<BigNumber>>();
@@ -56,7 +56,7 @@ function BuySellModal({ show1, setShow1, token }: any) {
   const [result, setResult]: any = useState(null);
   const { addToast } = useToasts();
   const api: any = InstantSwapApi;
-  const [tokens, setTokens] = useState([...toks])
+  const [tokens, setTokens] = useState([...config.walletTokens])
   const [fromMax, setFromMax] = useState(0);
   const [toMax, setToMax] = useState(0)
   const [fromBalance, setFromBalance] = useState(0);
@@ -621,7 +621,7 @@ function BuySellModal({ show1, setShow1, token }: any) {
             symbol:""
           };
           if (com_addresses[index] == "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2") {
-            to_token = toks[2];
+            to_token = config.walletTokens[2];
           }
   
           const beforeToTokenBalance =await getCoinBalance(account,active,library,to_token);

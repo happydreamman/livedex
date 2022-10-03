@@ -38,8 +38,8 @@ function ExchangeCard(props) {
   }
 
   // *** Switch Chain
-  const switchChain = async (chain_id : any) => {
-    const win : any = window;
+  const switchChain = async (chain_id) => {
+    const win = window;
     if (win.ethereum && chainId !== chain_id) {
       try {
         await win.ethereum.request({

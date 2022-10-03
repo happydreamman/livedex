@@ -6,7 +6,7 @@ import TopNav from './GeneralComponents/TopNav';
 import _ from "lodash";
 import { loadContract } from '../utils';
 import { BigNumber } from "@0x/utils";
-import { walletTokens as toks } from "../constants/spot-config/mainnet/config.json";
+import {config } from "../constants/spot-config/mainnet/config";
 import {
   CHANGE_NOW_FLOW, SIDE_SHIFT_TYPE, supportedDEXes, SIMPLE_SWAP_FIXED, DEXesImages,
   ZERO, PARASWAP_REFERRER_ACCOUNT, networks_dict
@@ -38,7 +38,7 @@ function Swap(props: any) {
   const [result, setResult]: any = useState(null);
   const { addToast } = useToasts();
   const api: any = InstantSwapApi;
-  const [tokens, setTokens] = useState([...toks])
+  const [tokens, setTokens] = useState([...config.walletTokens])
   const [fromMax, setFromMax] = useState(0);
   const [toMax, setToMax] = useState(0)
   const [fromBalance, setFromBalance] = useState(0);
